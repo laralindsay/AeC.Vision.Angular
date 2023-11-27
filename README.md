@@ -1,20 +1,17 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# 🛠️ Vision360
+Esta aplicação é destinada para acompanhamento de desempenho de equipes de Call Center, onde gestores conseguem acompanhar por meio de um dashboard o TMO, atendentes logados, IP da máquina, além de outros dados de acordo com a hierarquia.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+ :construction: Projeto em construção :construction:
+ Para realizar o login deve ser acessado por meio de VPN ou VDI designada, atualmente em construção por atualizações da API consumida e refatoração do código.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## ✔️ Tecnologias utilizadas
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+[![Typescript](https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/laralindsay/)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+[![Angular](https://img.shields.io/badge/Angular-0F0F11?style=for-the-badge&logo=angular&logoColor=white)](https://github.com/laralindsay/)
+
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://github.com/laralindsay/)
+
+[![PrimeNG](https://img.shields.io/badge/PrimeNG-6BA539?style=for-the-badge&logo=primeng&logoColor=white)](https://github.com/laralindsay/)
+
+
