@@ -1,0 +1,267 @@
+<app-page>  
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+  </ng-template>
+  
+  <ng-template appPageTemplate="content">
+    <div class="container bg-page pt-5 pgt-sub">
+      <h6>
+        <i class="bi bi-gear ms-3"></i>
+        INSTALAÇÃO
+      </h6>
+      <p class="ms-2 ps-3 w-50">
+        Para efetuar a instalação do Vision 360 na maquina do operador e necessário
+        seguir os seguintes passos:
+      </p>
+      <p-card>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>1</h6>
+            <p>
+              Criar uma pasta no disco C com o nome "Monitoramento" na máquina do
+              operador;
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>2</h6>
+            <p>
+              Copiar os arquivos da pasta:
+              <a class="text-primary">\\sophia\shared\Monitoramento\PRD\Instalador</a>
+              para a pasta criada no passo anterior;
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>3</h6>
+            <p>
+              Colocar o AeC.Automacao.MonitoramentoOperacional.exe para executar no
+              agendador de tarefas, para que assim que o operador logar ele ative a
+              aplicação;
+            </p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="container bg-page pt-5 pgt-sub">
+      <h6>
+        <i class="bi bi-person-x ms-3"></i>
+        OPERADOR NÃO APARECE NA HIERARQUIA?
+      </h6>
+      <p class="ms-2 ps-3 w-75">
+        Quando o operador não aparece na hierarquia ou aparece desconectado estando
+        logado na máquina, siga os passos a seguir:
+      </p>
+      <p-card>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>1</h6>
+            <p>
+              <b>Verificar se o Vision 360 está instalado de forma correta na
+                máquina.
+              </b>
+              Para executar essa verificação, acionar a TI Local para que seja
+              validado os pontos de Instalação.
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>2</h6>
+            <p>
+              <b>Verificar se o operador esta logado com o seu usuário de rede.</b>
+              Para executar essa verificação, basta validar na máquina do operador
+              se ele esta usando o usuário de rede dele.
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>3</h6>
+            <p>
+              <b>Verificar se o segmento do operador está cadastrado no Vision
+                360.</b>
+              Para executar essa verificação, acessar a aba de segmentos em
+              Configurações, caso não esteja cadatrado criar novo Segmento.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>4</h6>
+            <p>
+              <b>Caso o operador esteja logado com o usuário dele e mesmo assim não
+                aparece na ferramenta, verificar com a Gestão de Acessos se o
+                usuário de rede e o que está cadastrado no hominum.
+              </b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>5</h6>
+            <p>
+              <b>
+                Caso ele esteja com o usuário correto no Gestão de Acessos e ainda
+                não aparece, verificar se operador esta com hierarquia correta no
+                hominum.
+              </b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>6</h6>
+            <p>
+              <b>Caso todos os passos acima forem validados e mesmo assim o operador
+                não aparece, acionar o setor responsável pela ferramenta através de
+                chamado no GestãoX.</b>
+            </p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="container bg-page pt-5 pgt-sub">
+      <h6>
+        <i class="bi bi-pencil-square ms-3"></i>
+        CADASTRANDO UM SISTEMA
+      </h6>
+      <p class="ms-2 ps-3 w-50">
+        Para realizar o cadastro de um novo sistema, siga os passos a seguir:
+      </p>
+      <p-card>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>1</h6>
+            <p>
+              <b>Acessar a aba de Configurações/Sistemas;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>2</h6>
+            <p>
+              <b>Clicar em novo sistema;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>3</h6>
+            <p>
+              <b>Só deve ser colocado como padrão os sistemas que sejam comuns em
+                todas as operações;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>4</h6>
+            <p>
+              <b>Para sistemas Desktop é necessário acrescentar uma descrição para a
+                aplicação e o nome do processo executável da aplicação;</b>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>5</h6>
+            <p>
+              <b>Para sistemas Web ou Diretorio é necessário acrescentar uma
+                descrição para a aplicação e criar os titulos das aplicações</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>6</h6>
+            <p>
+              <b>Para sistemas web, colocar apenas o prefixo de inicio, por exemplo
+                "google.com.br", que o sistema considerará todos os valores que
+                vierem na frente como devidos.</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>7</h6>
+            <p>
+              <b>Para Diretórios, colocar apenas o prefixo de servidor e pasta, por
+                exemplo "servidor\pasta_com_acesso_permitido", que o sistema
+                considerará todos os arquivos dentro dessa pasta como devidos.</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>8</h6>
+            <p>
+              <b>Para sistemas Desktop é necessário acrescentar uma descrição para a
+                aplicação e o nome do processo executável da aplicação;</b>
+            </p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="container bg-page pt-5 pgt-sub">
+      <h6>
+        <i class="bi bi-sliders ms-3"></i>
+        CADASTRANDO UM SEGMENTO
+      </h6>
+      <p class="ms-2 ps-3 w-50">
+        Para realizar o cadastro de um novo segmento, siga os passos a seguir:
+      </p>
+      <p-card>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6>1</h6>
+            <p>
+              <b>Acessar a aba de Configurações/Segmentos;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>2</h6>
+            <p>
+              <b>Clicar em novo segmento;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>3</h6>
+            <p>
+              <b>O nome do segmento deve ser igual ao nome do segmento no
+                hominum;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>4</h6>
+            <p>
+              <b>O tempo de inatividade de mouse e teclado é de no mínimo 40
+                segundos;</b>
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6>5</h6>
+            <p>
+              <b>E necessário que seja selecionados os sistemas que não são padrões
+                para todas as operações, caso o sistema não esteja na lista,
+                cadastrar novo Sistema.</b>
+            </p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div class="container bg-page pt-5 mb-4 pgt-sub">
+      <h6>
+        <i class="bi bi-easel2 ms-3"></i>
+        DESCRIÇÃO DE INDICADORES
+      </h6>
+      <p-card>
+        <div class="row">
+          <div class="p-2 col h-100">
+            <h6><i class="bi bi-clock-history me-2"></i></h6>
+            <b>Tempo Ausente</b>
+            <p>
+              Somatório do período em que o operador esteve desconectado da máquina
+              (caso trabalhe remotamente) ou com máquina bloqueada.
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6><i class="bi bi-question-circle me-2"></i></h6>
+            <b>Tempo Inatividade</b>
+            <p>
+              Somatório do período em que o operador esteve logado, com a máquina
+              desbloqueada, mas sem atividade de mouse e teclado.
+            </p>
+          </div>
+          <div class="p-2 col h-100">
+            <h6><i class="bi bi-shield-exclamation me-2"></i></h6>
+            <b>Tempo Em Sistemas Indevidos</b>
+            <p>
+              Somatório do período em que o operador acessou um aplicativo ou site
+              que não estava configurado dentre os que ele pode acessar.
+            </p>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </ng-template>
+</app-page>

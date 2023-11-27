@@ -1,0 +1,13 @@
+<div
+  class="menu-item-container"
+  [routerLink]="menuItem?.routerLink"
+  routerLinkActive="active"
+  [pTooltip]="menuItem?.label ?? ''"
+  tooltipPosition="left"
+  [showDelay]="100"
+  (click)="menuOptionClick($event)"
+>
+  <div class="menu-item-content d-flex flex-column justify-content-center align-items-center gap-1">
+    <i [class]="menuItem?.icon"></i>
+  </div>
+</div>

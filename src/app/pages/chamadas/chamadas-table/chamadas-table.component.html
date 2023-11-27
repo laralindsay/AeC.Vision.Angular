@@ -1,0 +1,72 @@
+<p-table
+  [value]="tableData()?.data ?? []"
+  styleClass="p-datatable-striped px-3"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+  [loading]="loading()"
+  [showLoader]="false"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando de {first} até {last} de {totalRecords} registros"
+  [showFirstLastIcon]="false"
+
+  [lazy]="true"
+  [lazyLoadOnInit]="false"
+  [totalRecords]="tableData()?.total ?? 0"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Chamadas</th>
+      <th>Atendente</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>TMA</th>
+      <th>Número Chamador</th>
+      <th>Ausência</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr *ngIf="getRowData(rowData) as row">
+      <td>
+        <a [routerLink]="['.', row.id]">{{ row.chamada }}</a>
+      </td>
+      <td>{{ row.operador }}</td>
+      <td>{{ row.inicio | date:'dd/MM/yyyy - HH:mm:ss' }}</td>
+      <td>{{ row.fim | date:'dd/MM/yyyy - HH:mm:ss' }}</td>
+      <td>{{ row.duracao | secondsToTime }}</td>
+      <td>{{ row.numero }}</td>
+      <td>{{ row.ausencia | secondsToTime }}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="loadingbody">
+    <tr>
+      <td colspan="300">
+        <div class="text-center py-4">
+          <app-loading size="110"></app-loading>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="300">
+        <div class="text-center">
+          <div *ngIf="!hasError()" class="my-5">Nenhuma chamada encontrada!</div>
+          <div
+            *ngIf="hasError()"
+            class="alert alert-danger d-inline-block my-5"
+            role="alert"
+          >
+            Falha ao carregar!
+            <strong (click)="tryAgain$.next(undefined)" class="cursor-pointer">Clique aqui</strong>
+            para tentar novamente
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

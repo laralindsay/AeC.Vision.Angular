@@ -1,0 +1,97 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-light w-100 mb-4">
+  <div class="d-flex align-items-end">
+    <div class="fs-5 fw-bold text-primary lh-1">
+      Eventos
+    </div>
+  </div>
+</div>
+
+<div class="px-3">
+  <app-analitico-eventos-filter [filterForm]="filterForm"></app-analitico-eventos-filter>
+</div>
+
+<p-table
+  [value]="tableData()?.registros ?? []"
+  styleClass="p-datatable-striped px-3 py-4"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+  [loading]="loading()"
+  [showLoader]="false"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando de {first} até {last} de {totalRecords} registros"
+  [showFirstLastIcon]="false"
+
+  [lazy]="true"
+  [lazyLoadOnInit]="false"
+  [totalRecords]="data()?.filtrados ?? 0"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 6em">Matrícula</th>
+      <th>Operador</th>
+      <th>Supervisor</th>
+      <th>Data/ Hora Início</th>
+      <th>Data/Hora Fim</th>
+      <th style="width: 6em">Tempo</th>
+      <th style="width: 6em">Evento</th>
+      <th style="width: 6em">Registro</th>
+      <th>Estação</th>
+      <th style="width: 6em">IP</th>
+      <th style="width: 4em" class="text-center">Ações</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr *ngIf="getRowData(rowData) as data">
+      <td>{{ data.matricula ?? "-" }}</td>
+      <td>{{ data.operador }}</td>
+      <td>{{ data.supervisor }}</td>
+      <td>{{ data.dataHoraInicio }}</td>
+      <td>{{ data.dataHoraFim }}</td>
+      <td>{{ data.tempo }}</td>
+      <td>{{ data.evento }}</td>
+      <td>{{ data.registro }}</td>
+      <td>{{ data.estacao }}</td>
+      <td>{{ data.estacaoIPv4 }}</td>
+      <td>
+        <div class="text-center">
+          <a
+            *ngIf="data.possuiAlerta"
+            pButton
+            pRipple
+            icon="bi bi-zoom-in"
+            class="p-button-primary p-button-sm"
+            (click)="openDetail($event, data)"
+          ></a>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="loadingbody">
+    <tr>
+      <td colspan="300">
+        <div class="text-center py-4">
+          <app-loading size="110"></app-loading>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="300">
+        <div class="text-center">
+          <div *ngIf="!hasError()" class="my-5">Nenhum evento encontrado!</div>
+          <div *ngIf="hasError()" class="alert alert-danger d-inline-block my-5" role="alert">
+            Falha ao carregar!
+            <strong class="cursor-pointer" (click)="tryAgain()">Clique aqui</strong>
+            para tentar novamente
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

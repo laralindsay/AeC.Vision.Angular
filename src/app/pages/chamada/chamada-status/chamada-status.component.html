@@ -1,0 +1,51 @@
+<div class="row g-2">
+  <div class="col">
+    <app-indicador
+      header="TEMPO DE IMPRODUTIVIDADE"
+      [loading]="loading()"
+      [subValue]="data()?.improdutividade | secondsToTime"
+      subValueClass="bg-success bg-opacity-25 text-success"
+      (tryAgain)="tryAgain$.next(undefined)"
+    ></app-indicador>
+  </div>
+
+  <div class="col">
+    <app-indicador
+      header="TEMPO DE INATIVIDADE"
+      [loading]="loading()"
+      [subValue]="data()?.inatividade | secondsToTime"
+      subValueClass="bg-danger bg-opacity-25 text-danger"
+      (tryAgain)="tryAgain$.next(undefined)"
+    ></app-indicador>
+  </div>
+
+  <div class="col">
+    <app-indicador
+      header="TEMPO DE SILÊNCIO"
+      [loading]="loading()"
+      [subValue]="data()?.silencio | secondsToTime"
+      subValueClass="bg-warning bg-opacity-25 text-warning"
+      (tryAgain)="tryAgain$.next(undefined)"
+    ></app-indicador>
+  </div>
+
+  <div class="col">
+    <app-indicador
+      header="TEMPO DE AUSÊNCIA"
+      [loading]="loading()"
+      [subValue]="data()?.ausencia | secondsToTime"
+      subValueClass="bg-primary bg-opacity-25 text-primary"
+      (tryAgain)="tryAgain$.next(undefined)"
+    ></app-indicador>
+  </div>
+
+  <div class="col">
+    <app-indicador
+      header="NAVEGAÇÃO EM SISTEMAS"
+      [loading]="loading()"
+      [subValue]="data()?.sistema | secondsToTime"
+      subValueClass="bg-secondary bg-opacity-25 text-secondary"
+      (tryAgain)="tryAgain$.next(undefined)"
+    ></app-indicador>
+  </div>
+</div>

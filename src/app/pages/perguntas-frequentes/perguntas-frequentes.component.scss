@@ -1,0 +1,72 @@
+@import "src/assets/styles/theme/variables";
+
+:host {
+  font-size: 14px;
+  font-family: Arial;
+
+  ::ng-deep .p-button {
+    color: #444;
+    text-align: center;
+  }
+
+  ::ng-deep .user .p-avatar {
+    background-color: var(--theme-primary);
+    color: #fff;
+  }
+
+  .user-data {
+    color: #444;
+    width: 122px;
+    text-align: right;
+    line-height: 12px;
+
+    h5 {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    h6 {
+      font-size: 12px;
+    }
+  }
+  .pgt-header h6,
+  .pgt-sub h6 {
+    font-weight: 600;
+  }
+
+
+  ::ng-deep {
+    .p-card .p-card-body{
+      border-top: 1rem var(--theme-primary) solid;
+      border-radius: 6px;
+    }
+    .p-confirm-dialog .p-dialog-content {
+      justify-content: center;
+      padding: 2.5rem 0 0 0;
+    }
+
+    .p-dialog .p-dialog-header {
+      border-radius: 6px 6px 0 0;
+    }
+    .p-dialog .p-dialog-footer {
+      display: flex;
+      justify-content: center;
+
+      .p-button-outlined {
+        color: $color-secondary;
+        width: 120px;
+        border-radius: 6px;
+      }
+
+      .p-confirm-dialog-accept {
+        background-color: $color-secondary;
+        color: #fff;
+        border-color: $color-secondary;
+        width: 120px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

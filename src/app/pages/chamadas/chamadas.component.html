@@ -1,0 +1,15 @@
+<app-page [hasFilters]="true">
+  <ng-template appPageTemplate="content">
+    <div class="pb-3 d-flex flex-column gap-3">
+      <app-breadcrumb [byRoute]="true" [backButtonRouterLink]="routerLinkGestao()"></app-breadcrumb>
+
+      <div class="px-3">
+        <app-chamadas-resumo></app-chamadas-resumo>
+      </div>
+
+      <div>
+        <app-chamadas-table></app-chamadas-table>
+      </div>
+    </div>
+  </ng-template>
+</app-page>

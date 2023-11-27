@@ -1,0 +1,31 @@
+@import "src/assets/styles/theme/variables";
+
+:host {
+  .menu-item-container {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    width: 4rem;
+
+    &:hover,
+    &.active {
+      .menu-item-content {
+        transform: unset;
+      }
+    }
+
+    .menu-item-content {
+      width: 5em;
+      height: 4em;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+
+      .pi {
+        font-size: 23px;
+      }
+
+
+      color: white;    }
+  }
+}

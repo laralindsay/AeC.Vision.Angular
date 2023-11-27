@@ -1,0 +1,80 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-light w-100 mb-4">
+  <div class="d-flex align-items-end">
+    <div class="fs-5 fw-bold text-primary lh-1">
+      Acessos
+    </div>
+  </div>
+</div>
+
+<div class="px-3">
+  <app-analitico-acessos-filter [filterForm]="filterForm"></app-analitico-acessos-filter>
+</div>
+
+<p-table
+  [value]="tableData()?.acessos ?? []"
+  styleClass="p-datatable-striped px-3 py-4"
+  [paginator]="true"
+  [rows]="10"
+  [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+  [loading]="loading()"
+  [showLoader]="false"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando de {first} até {last} de {totalRecords} registros"
+  [showFirstLastIcon]="false"
+
+  [lazy]="true"
+  [lazyLoadOnInit]="false"
+  [totalRecords]="data()?.filtrados ?? 0"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 6em">Matrícula</th>
+      <th>Operador</th>
+      <th>Supervisor</th>
+      <th>Data/ Hora Início</th>
+      <th>Data/Hora Fim</th>
+      <th>Tempo</th>
+      <th>Evento</th>
+      <th>Estação</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr *ngIf="getRowData(rowData) as data">
+      <td>{{ data.matricula ?? "-" }}</td>
+      <td>{{ data.nome ?? '-' }}</td>
+      <td> - </td>
+      <td>{{ data.dataHoraInicio }}</td>
+      <td>{{ data.dataHoraFim }}</td>
+      <td>{{ data.tempo | secondsToTime }}</td>
+      <td>{{ data.evento }}</td>
+      <td>{{ data.estacao }}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="loadingbody">
+    <tr>
+      <td colspan="300">
+        <div class="text-center py-4">
+          <app-loading size="110"></app-loading>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="300">
+        <div class="text-center">
+          <div *ngIf="!hasError()" class="my-5">Nenhum evento encontrado!</div>
+          <div *ngIf="hasError()" class="alert alert-danger d-inline-block my-5" role="alert">
+            Falha ao carregar!
+            <strong class="cursor-pointer" (click)="tryAgain()">Clique aqui</strong>
+            para tentar novamente
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,12 @@
+@import "src/assets/styles/theme/variables";
+
+:host {
+  width: 100vw;
+
+  ::ng-deep {
+    button {
+      height: 30px !important;
+      width: 28px;
+    }
+  }
+}

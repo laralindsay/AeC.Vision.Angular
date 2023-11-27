@@ -1,0 +1,43 @@
+<div class="d-flex align-items-center gap-2 p-3 bg-light w-100">
+  <div class="flex-grow-1 d-flex align-items-end justify-content-start gap-2">
+    <div *ngIf="backButtonRouterLink?.length" class="align-self-stretch">
+      <button
+        pButton
+        pRipple
+        icon="pi pi-angle-left"
+        [routerLink]="backButtonRouterLink"
+        pTooltip="Voltar"
+        class="h-100"
+      ></button>
+    </div>
+
+    <ng-container *ngFor="let item of breadcrumbs(); let index = index">
+      <div class="d-flex gap-3 align-items-end">
+
+        <div *ngIf="item?.icon?.length" [class]="item?.labelClass">
+          <i class="fs-4" [class]="item.icon"></i>
+        </div>
+
+        <div class="d-flex flex-column">
+          <div class="text-muted">
+            {{ item.description }}
+          </div>
+          <a class="lh-1 fw-bold fs-5 text-decoration-none pb-1"
+             [routerLink]="item.routerLink"
+             [queryParams]="item.queryParams"
+             [class]="item.labelClass">
+            {{ item.label }}
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="(index + 1) !== breadcrumbs()?.length" class="pb-1">
+        <i class="pi pi-chevron-right align-bottom text-muted"></i>
+      </div>
+    </ng-container>
+  </div>
+
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

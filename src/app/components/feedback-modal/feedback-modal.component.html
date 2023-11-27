@@ -1,0 +1,44 @@
+<div class="bg-light rounded shadow p-3">
+  <div class="d-flex flex-column gap-2">
+    <div class="fw-bold">
+      Comentário do feedback
+    </div>
+
+    <div *ngIf="loading" class="text-center py-2">
+      <app-loading size="90"></app-loading>
+    </div>
+
+    <div *ngIf="!loading">
+      <textarea
+        pInputTextarea
+        [rows]="5"
+        [cols]="30"
+        [formControl]="form.controls.feedback"
+      ></textarea>
+    </div>
+
+    <div *ngIf="hasError" class="text-danger small lh-1 text-center">
+      <div class="fw-bold">Atenção!</div>
+      <div class="small">Não possível carregar o feedback anterior!</div>
+      <div class="small">Ao salvar um novo o anterior será substituído!</div>
+    </div>
+
+    <div *ngIf="!loading" class="d-flex gap-2">
+      <button
+        pButton
+        pRipple
+        [loading]="saving"
+        (click)="save()"
+        label="Salvar"
+      ></button>
+
+      <button
+        pButton
+        pRipple
+        (click)="cancel()"
+        label="Cancelar"
+        class="p-button-text color-secondary"
+      ></button>
+    </div>
+  </div>
+</div>

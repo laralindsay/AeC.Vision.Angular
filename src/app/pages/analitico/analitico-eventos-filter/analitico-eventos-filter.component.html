@@ -1,0 +1,82 @@
+<div class="row g-2">
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Eventos</label>
+      <p-dropdown
+        placeholder="Filtrar eventos..."
+        [formControl]="filterForm.controls.tipoEvento"
+        [appDatasource]="tipoEvento$"
+        optionValue="id"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Operação</label>
+      <p-dropdown
+        placeholder="Filtrar operação..."
+        [formControl]="filterForm.controls.operacao"
+        [appDatasource]="operacao$"
+        optionValue="id"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Segmento</label>
+      <p-dropdown
+        placeholder="Filtrar segmento..."
+        [formControl]="filterForm.controls.segmento"
+        [appDatasource]="segmento$"
+        [emptyMessage]="(filterForm.controls.operacao.value != null) ? 'Nenhum segmento encontrado' : 'Selecione uma operação primeiro'"
+        optionValue="id"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="col-auto" *ngIf="showSupervisorFilter()">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Supervisor</label>
+      <p-inputNumber
+        mode="decimal"
+        placeholder="Filtrar matricula..."
+        [formControl]="filterForm.controls.supervisor"
+        [min]="0"
+        [max]="999999"
+        [useGrouping]="false"
+      ></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Operador</label>
+      <p-inputNumber
+        mode="decimal"
+        placeholder="Filtrar matricula..."
+        [formControl]="filterForm.controls.operador"
+        [min]="0"
+        [max]="999999"
+        [useGrouping]="false"
+      ></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Data</label>
+      <p-calendar
+        class="calendar"
+        [showIcon]="true"
+        [formControl]="filterForm.controls.data"
+        placeholder="Filtrar por data"
+        [maxDate]="maxDate"
+      ></p-calendar>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div *ngIf="hasFilters" class="d-flex flex-row gap-2">
+  <div class="p-inputgroup" *ngIf="hasMatriculaFilter">
+    <p-inputNumber
+      mode="decimal"
+      placeholder="Filtrar matricula..."
+      [formControl]="form.controls.matricula"
+      [min]="0"
+      [max]="999999"
+      [useGrouping]="false"
+    ></p-inputNumber>
+  </div>
+
+  <div *ngIf="hasOperacaoFilter">
+    <p-dropdown
+      placeholder="Filtrar Operação..."
+      [formControl]="form.controls.operacaoId"
+      [appDatasource]="operacoes$"
+      optionValue="id"
+      optionLabel="nome"
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+
+  <div *ngIf="hasSegmentoFilter">
+    <p-dropdown
+      placeholder="Filtrar Segmento..."
+      [formControl]="form.controls.segmentoId"
+      [appDatasource]="segmentos$"
+      [emptyMessage]="form.controls.operacaoId.value ? 'Nenhum segmento encontrado' : 'Selecione uma operação primeiro'"
+      emptyFilterMessage="Vazio2"
+      optionValue="id"
+      optionLabel="nome"
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+
+  <div class="p-inputgroup" *ngIf="hasDateFilter">
+    <p-calendar
+      class="calendar"
+      [showIcon]="true"
+      [formControl]="form.controls.data"
+      placeholder="Filtrar por data"
+      [minDate]="minDateVal"
+      [maxDate]="maxDateVal"
+    ></p-calendar>
+  </div>
+
+</div>

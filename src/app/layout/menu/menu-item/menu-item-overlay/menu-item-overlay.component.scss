@@ -1,0 +1,18 @@
+:host {
+  ::ng-deep {
+
+    p-menu {
+      .p-menu {
+        background-color: var(--theme-primary);
+        border: 0;
+
+        .p-menuitem-link {
+          .p-menuitem-text,
+          .p-menuitem-icon {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

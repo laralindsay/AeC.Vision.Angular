@@ -1,0 +1,65 @@
+<app-page>
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [items]="breadcrumbs()"></app-breadcrumb>
+  </ng-template>
+
+  <ng-template appPageTemplate="content">
+    <form class="p-3 d-flex flex-column gap-3" (ngSubmit)="submit()">
+      <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
+          <div>
+            <label class="fw-bold">Matrícula:</label>
+          </div>
+          <input
+            pInputText
+            [formControl]="form.controls.matricula"
+            placeholder="6 Dígitos"
+            class="w-50"
+          />
+
+          <div class="container pt-3">
+            <div class="row">
+              <div class="col">
+                <p-checkbox
+                  [binary]="true"
+                  label="Gerir Sistemas"
+                  [formControl]="form.controls.gerirSistema"
+                ></p-checkbox>
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <p-checkbox
+                  [binary]="true"
+                  label="Gerir Parametrização"
+                  [formControl]="form.controls.gerirParametrizacao"
+                ></p-checkbox>
+              </div>
+              <div class="col">
+                <p-checkbox
+                  [binary]="true"
+                  label="Gerir Administradores"
+                  [formControl]="form.controls.gerirAdministrador"
+                ></p-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="d-flex flex-column px-4">
+          <div>
+            <label class="fw-bold">Matriculas Adcionadas: {{ values }}</label>
+          </div>
+        </div> -->
+      </div>
+      <div>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          label="Salvar"
+          icon="pi pi-save"
+        ></button>
+      </div>
+    </form>
+  </ng-template>
+</app-page>

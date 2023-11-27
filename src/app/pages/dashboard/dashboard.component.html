@@ -1,0 +1,17 @@
+<app-page [hasFilters]="true">
+  <ng-template appPageTemplate="content">
+    <div class="d-flex flex-column gap-3">
+      <div *ngIf="!isAdmin()" class="px-3">
+        <app-indicadores></app-indicadores>
+      </div>
+
+      <div>
+        <app-dashboard-hierarquia></app-dashboard-hierarquia>
+      </div>
+
+      <div *ngIf="canShowAlertas()">
+        <app-dashboard-alertas></app-dashboard-alertas>
+      </div>
+    </div>
+  </ng-template>
+</app-page>

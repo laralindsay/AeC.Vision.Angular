@@ -1,0 +1,74 @@
+<div class="row align-items-stretch g-2">
+  <div class="col-12">
+    <div class="bg-light rounded p-2 d-flex align-items-center gap-2">
+      <i class="pi pi-info-circle text-primary"></i>
+      Visão gestão: Retorna dados das últimas 24hrs
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="bg-light rounded p-2">
+      <div class="row g-2">
+        <div class="col-2">
+          <div class="fw-bold fs-6">STATUS</div>
+          <p-skeleton *ngIf="loading.status" height="2em"></p-skeleton>
+          <div class="px-3 py-1 rounded d-flex justify-content-between align-items-center" *ngIf="!loading.status" [class]="conectadoClass()">
+            <div class="fw-bold fs-6">{{ status()?.conectado ? 'ONLINE' : 'OFFLINE' }}</div>
+            <i class="pi pi-map-marker"></i>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="fw-bold fs-6">MÁQUINA</div>
+          <p-skeleton *ngIf="loading.status" height="2em"></p-skeleton>
+          <div class="bg-dark bg-opacity-25 px-3 py-1 rounded" *ngIf="!loading.status">
+            <div class="small">{{ status()?.estacao }} / {{ status()?.iPv4 }}</div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="fw-bold fs-6">SEGMENTO</div>
+          <p-skeleton *ngIf="loading.status" height="2em"></p-skeleton>
+          <div class="bg-dark bg-opacity-25 px-3 py-1 rounded" *ngIf="!loading.status">
+            <div class="fs-6 fw-bold ">{{ status()?.segmento }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="bg-light rounded p-2">
+      <div class="row g-2">
+        <div class="col">
+          <div class="fw-bold fs-6">CHAMADAS TOTAL</div>
+          <p-skeleton *ngIf="loading.chamadas" height="2em"></p-skeleton>
+          <div class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center" *ngIf="!loading.chamadas">
+            <div class="fw-bold fs-6">{{ chamadas()?.total }}</div>
+            <i class="pi pi-map-marker"></i>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="fw-bold fs-6">TMO DIA</div>
+          <p-skeleton *ngIf="loading.chamadas" height="2em"></p-skeleton>
+          <div class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center" *ngIf="!loading.chamadas">
+            <div class="fw-bold fs-6">{{ chamadas()?.media }}</div>
+            <i class="pi pi-map-marker"></i>
+          </div>
+        </div>
+
+        <div class="col d-flex align-items-end">
+          <a pButton pRipple class="w-100 justify-content-center gap-2" [routerLink]="visaoGeralRouterLink()">
+            <i class="pi pi-file"></i>
+            Visão Geral
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <app-indicadores [resumido]="true" logadosHeader="TEMPO LOGADO"></app-indicadores>
+  </div>
+</div>

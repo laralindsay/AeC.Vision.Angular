@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -25,17 +24,21 @@
     ],
     "paths": {
       "@app/*": ["src/app/*"],
-      "@core/*": ["src/app/core/*"],
+      "@components/*": ["src/app/components/*"],
       "@containers/*": ["src/app/containers/*"],
+      "@enums/*": ["src/enums/app/*"],
       "@environments/*": ["src/environments/*"],
+      "@generics/*": ["src/app/generics/*"],
       "@guards/*": ["src/app/guards/*"],
       "@http-services/*": ["src/app/services/http/*"],
       "@layout/*": ["src/app/layout/*"],
       "@modals/*": ["src/app/modals/*"],
-      "@modules/*": ["src/app/modules/*"],
       "@pages/*": ["src/app/pages/*"],
+      "@pipes/*": ["src/app/pipes/*"],
+      "@repositories/*": ["src/app/repositories/*"],
       "@services/*": ["src/app/services/*"],
-      "@shared/*": ["src/app/shared/*"]
+      "@validators/*": ["src/app/validators/*"],
+      "@api-vision360/*": ["src/api-vision360/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,0 +1,64 @@
+<app-page>
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [backButtonRouterLink]="'../'" [items]="breadcrumbs()"></app-breadcrumb>
+  </ng-template>
+
+  <ng-template appPageTemplate="content">
+    <form class="p-3 d-flex flex-column gap-3" (ngSubmit)="submit()">
+
+      <div class="d-flex gap-3">
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <div>
+            <label class="fw-bold">TIPO DE SISTEMA:</label>
+          </div>
+          <p-dropdown
+            [formControl]="form.controls.idTipoSistema"
+            [appDatasource]="tiposSistemas$"            
+            optionValue="id"
+            optionLabel="nome"
+            styleClass="w-100"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex gap-3">
+        <div class="d-flex flex-column" style="min-width: 400px">
+          <div>
+            <label class="fw-bold">DESCRIÇÃO:</label>
+          </div>
+          <input pInputText [formControl]="form.controls.descricao" placeholder="Descrição"/>
+        </div>
+
+        <div class="d-flex flex-column" style="max-width: 200px">
+          <div>
+            <label class="fw-bold">EXECUTÁVEL:</label>
+          </div>
+          <input pInputText [formControl]="form.controls.executavel" placeholder="Executável"/>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div>
+          <label class="fw-bold">TÍTULOS PERMITIDOS:</label>
+        </div>
+        <p-chips
+          [(ngModel)]="listSistemaTitulo"
+          name="titulo"
+          placeholder="Titulos permitidos"
+          [separator]="$any(titulosPermitidosRegex)"
+          [addOnTab]="true"
+          [addOnBlur]="true"
+          styleClass="w-100"
+          [disabled]="isTypeDesktop"
+          (onAdd)="onAddChip($event)"
+          (onRemove)="onRemoveChip($event)"
+        >
+        </p-chips>
+      </div>
+
+      <div>
+        <button pButton pRipple type="submit" label="Salvar" icon="pi pi-save"></button>
+      </div>
+    </form>
+  </ng-template>
+</app-page>

@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="login()" errorTailor>
+  <div class="d-flex flex-column gap-2">
+
+    <div class="p-inputgroup input-group-username">
+      <div class="p-inputgroup-addon input-username-icon"></div>
+      <input
+        type="text"
+        placeholder="Login"
+        pInputText
+        formControlName="userID"
+        autocomplete="userID"
+      />
+    </div>
+
+    <div class="p-inputgroup input-group-password">
+      <div class="p-inputgroup-addon input-password-icon"></div>
+      <p-password
+        [feedback]="false"
+        [toggleMask]="true"
+        placeholder="Senha"
+        autocomplete="current-password"
+        styleClass="w-100"
+        formControlName="password"
+      />
+    </div>
+
+<!--    <div>-->
+<!--      <p-checkbox-->
+<!--        inputId="admin"-->
+<!--        [binary]="true"-->
+<!--        label="Logar como admin (teste)"-->
+<!--        formControlName="admin"-->
+<!--      ></p-checkbox>-->
+<!--    </div>-->
+
+    <div class="pt-1">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Login"
+        [loading]="isLoading"
+        class="w-100"
+        iconPos="right"
+      ></button>
+    </div>
+  </div>
+</form>

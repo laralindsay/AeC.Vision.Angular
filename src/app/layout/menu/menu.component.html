@@ -1,0 +1,17 @@
+<div class="menu-container h-100 bg-primary">
+  <div class="pt-4"></div>
+
+  <div class="top-vision d-flex flex-column justify-content-start" >
+    <app-menu-item [menuItem]="menuItemHome" ></app-menu-item>
+  </div>
+
+  <div class="pt-4"></div>
+
+  <div>
+    <app-menu-item
+      *ngFor="let menuItem of menuItems()"
+      [menuItem]="menuItem"
+      (click)="menuItem?.routerAction?.()"
+    ></app-menu-item>
+  </div>
+</div>

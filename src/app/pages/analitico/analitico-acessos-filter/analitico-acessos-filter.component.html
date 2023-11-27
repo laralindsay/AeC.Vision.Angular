@@ -1,0 +1,27 @@
+<div class="row g-2">
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Aderência</label>
+      <p-dropdown
+        placeholder="Filtrar aderência..."
+        [formControl]="filterForm.controls.aderenciaAcesso"
+        [appDatasource]="aderenciaAcesso$"
+        optionValue="id"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="col-auto">
+    <div class="d-flex flex-column p-1">
+      <label class="fw-bold">Acesso</label>
+      <p-dropdown
+        placeholder="Filtrar tipo acesso..."
+        [formControl]="filterForm.controls.tipoAcesso"
+        [appDatasource]="tipoAcesso$"
+        optionValue="id"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+  </div>
+</div>

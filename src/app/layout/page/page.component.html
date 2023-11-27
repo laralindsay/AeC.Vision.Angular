@@ -1,0 +1,56 @@
+<div class="d-flex flex-column justify-content-center gap-2">
+  <div class="d-flex justify-content-between gap-3 px-3 pb-2 pt-3" [style.min-height]="'65px'">
+    <div class="">
+      <ng-container *ngIf="headerTemplate">
+        <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+      </ng-container>
+
+      <app-page-filters
+        *ngIf="!headerTemplate && hasFilters"
+        [hasFilters]="hasFilters"
+        [hasMatriculaFilter]="hasMatriculaFilter"
+        [hasOperacaoFilter]="hasOperacaoFilter"
+        [hasSegmentoFilter]="hasSegmentoFilter"
+        [hasDateFilter]="hasDateFilter"
+      ></app-page-filters>
+    </div>
+
+    <div class="">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column user-data">
+          <div class="text-end lh-sm fw-bold">{{user()?.nome}}</div>
+          <small class="text-end lh-1">{{ user()?.perfil?.nome ?? 'Sem perfil'}}</small>
+        </div>
+
+        <p-avatar
+          icon="pi pi-user"
+          shape="circle"
+          class="px-2 ms-3"
+          styleClass="bg-primary text-light"
+        ></p-avatar>
+
+        <p-button
+          (click)="logout()"
+          label="Sair"
+          icon="pi pi-sign-out"
+          styleClass="p-button-text text-dark"
+        ></p-button>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="subHeaderTemplate">
+    <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
+  </div>
+
+  <div>
+    <ng-container *ngIf="contentTemplate">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!contentTemplate">
+      <router-outlet></router-outlet>
+    </ng-container>
+  </div>
+</div>

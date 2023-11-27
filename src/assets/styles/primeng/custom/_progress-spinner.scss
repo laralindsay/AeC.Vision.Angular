@@ -1,0 +1,11 @@
+@import "src/assets/styles/theme/variables";
+
+p-progressspinner {
+  .p-progress-spinner {
+    .p-progress-spinner-svg {
+      .p-progress-spinner-circle {
+        stroke: $color-primary !important;
+      }
+    }
+  }
+}

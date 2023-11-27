@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AeC.Vision.Angular": {
+    "AeC-Automacao-Vision360-New-Portal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ae-c.vision.angular",
+            "outputPath": "dist/aec.automacao.vision360.new.portal-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,7 +30,37 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/assets/styles/theme/theme.scss",
+                "bundleName": "theme"
+              },
+              {
+                "input": "src/assets/styles/primeng/index.scss",
+                "bundleName": "primeng",
+                "inject": false
+              },
+              {
+                "input": "src/assets/styles/primeng/index-admin.scss",
+                "bundleName": "primeng-admin",
+                "inject": false
+              },
+              {
+                "input": "src/assets/styles/bootstrap/bootstrap.scss",
+                "bundleName": "bootstrap"
+              },
+              {
+                "input": "src/assets/styles/material/material.scss",
+                "bundleName": "material"
+              },
+              {
+                "input": "src/assets/styles/custom/index.scss",
+                "bundleName": "custom"
+              },
+              {
+                "input": "src/assets/styles/flaticon/flaticon.scss",
+                "bundleName": "flaticon"
+              }
             ],
             "scripts": []
           },
@@ -39,13 +69,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "5kb",
+                  "maximumError": "5kb"
                 }
               ],
               "outputHashing": "all"
@@ -57,6 +87,30 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "hml": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hml.ts"
+                }
+              ]
+            },
+            "prd": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prd.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -65,10 +119,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AeC.Vision.Angular:build:production"
+              "browserTarget": "AeC-Automacao-Vision360-New-Portal:build:production"
             },
             "development": {
-              "browserTarget": "AeC.Vision.Angular:build:development"
+              "browserTarget": "AeC-Automacao-Vision360-New-Portal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +130,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AeC.Vision.Angular:build"
+            "browserTarget": "AeC-Automacao-Vision360-New-Portal:build"
           }
         },
         "test": {
@@ -97,7 +151,9 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../node_modules/chart.js/dist/chart.js"
+            ]
           }
         }
       }

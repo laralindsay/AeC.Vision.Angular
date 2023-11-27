@@ -1,0 +1,145 @@
+<app-page>
+  <ng-template appPageTemplate="header">
+    <div class="d-flex flex-row gap-2">
+      <div class="p-inputgroup">
+        <input
+          type="text"
+          pInputText
+          placeholder="Filtrar matricula..."
+          [formControl]="filterForm.controls.matricula"
+        />
+        <button type="button" pButton pRipple icon="pi pi-search"></button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+  </ng-template>
+
+  <ng-template appPageTemplate="content">
+    <div class="d-flex gap-3 justify-content-between align-items-end m-3">
+      <div>
+        <app-message
+          message="Usuários que possuem perfil de administrador no sistema"
+          type="info"
+        ></app-message>
+      </div>
+      <div>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-plus"
+          label="Novo Administrador"
+          class="p-button p-button-primary"
+          [routerLink]="['./add']"
+        ></button>
+      </div>
+    </div>
+    <div class="m-3">
+      <p-table
+        [value]="administradoresTableData() ?? []"
+        styleClass="p-datatable-striped"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[5, 10, 20, 50, 100]"
+        [loading]="loading()"
+        [showLoader]="false"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando de {first} até {last} de {totalRecords} registros"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Matrículas</th>
+            <th>Gerir Sistemas</th>
+            <th>Gerir Administradores</th>
+            <th>Gerir Parametrização</th>
+            <th scope="col" class="text-center" [style.width]="'8em'">Ações</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData>
+          <tr *ngIf="getRowData(rowData) as data">
+            <td>{{ data.matricula }}</td>
+            <td>
+              <p-checkbox
+                [(ngModel)]="data.gerirSistema"
+                [binary]="true"
+                [disabled]="true"
+              ></p-checkbox>
+            </td>
+            <td>
+              <p-checkbox
+                [(ngModel)]="data.gerirAdministrador"
+                [binary]="true"
+                [disabled]="true"
+              ></p-checkbox>
+            </td>
+            <td>
+              <p-checkbox
+                [(ngModel)]="data.gerirParametrizacao"
+                [binary]="true"
+                [disabled]="true"
+              ></p-checkbox>
+            </td>
+            <td>
+              <div class="px-2 d-flex gap-2">
+                <a
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button-primary p-button-sm"
+                  [routerLink]="['./', rowData.id]"
+                  pTooltip="Editar"
+                ></a>
+
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-danger p-button-sm"
+                  pTooltip="Excluir"
+                  [loading]="deleting[rowData.id]"
+                  (click)="confirmDelete($event, rowData)"
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="loadingbody">
+          <tr>
+            <td colspan="300">
+              <div class="text-center py-4">
+                <app-loading size="110"></app-loading>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="300">
+              <div class="text-center">
+                <div *ngIf="!hasError()" class="my-5">
+                  Nenhuma matrícula encontrada!
+                </div>
+                <div
+                  *ngIf="hasError()"
+                  class="alert alert-danger d-inline-block my-5"
+                  role="alert"
+                >
+                  Falha ao carregar!
+                  <strong (click)="tryAgain()" class="cursor-pointer"
+                    >Clique aqui</strong
+                  >
+                  para tentar novamente
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</app-page>

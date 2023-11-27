@@ -1,0 +1,11 @@
+@import "src/assets/styles/theme/variables";
+
+:host {
+  .menu-container {
+    text-align: center;
+
+    .top-vision {
+      background: url("~src/assets/images/vision-logo-top.svg") no-repeat 15px center;
+    }
+  }
+}

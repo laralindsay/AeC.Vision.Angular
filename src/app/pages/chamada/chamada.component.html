@@ -1,0 +1,17 @@
+<app-page>
+
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [byRoute]="true" backButtonRouterLink=".."></app-breadcrumb>
+  </ng-template>
+
+  <ng-template appPageTemplate="content">
+    <div class="d-flex flex-column gap-2 p-3">
+      <div>
+        <app-chamada-status></app-chamada-status>
+      </div>
+      <div>
+        <app-chamada-chart></app-chamada-chart>
+      </div>
+    </div>
+  </ng-template>
+</app-page>

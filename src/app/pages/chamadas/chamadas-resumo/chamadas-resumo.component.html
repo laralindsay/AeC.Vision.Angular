@@ -1,0 +1,46 @@
+<div class="row row-cols-xl-4 row-cols-xxl-5 g-2" *ngIf="!hasError">
+  <div class="col">
+    <div class="bg-light rounded p-2 d-flex flex-column gap-2">
+      <div class="fw-bold fs-6">
+        CHAMADAS ATENDIDAS
+      </div>
+      <p-skeleton height="2em" *ngIf="loading"></p-skeleton>
+      <div *ngIf="!loading" class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center">
+        <div class="fw-bold fs-6">{{ resumo()?.total }}</div>
+        <i class="pi pi-phone"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="bg-light rounded p-2 d-flex flex-column gap-2">
+      <div class="fw-bold fs-6">
+        TEMPO MÉDIO DAS CHAMADAS
+      </div>
+      <p-skeleton height="2em" *ngIf="loading"></p-skeleton>
+      <div *ngIf="!loading" class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center">
+        <div class="fw-bold fs-6">{{ resumo()?.media | secondsToTime }}</div>
+        <i class="pi pi-phone"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="bg-light rounded p-2 d-flex flex-column gap-2">
+      <div class="fw-bold fs-6">
+        NÚMEROS ATENDIDOS
+      </div>
+      <p-skeleton height="2em" *ngIf="loading"></p-skeleton>
+      <div *ngIf="!loading" class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center">
+        <div class="fw-bold fs-6">{{ resumo()?.total }}</div>
+        <i class="pi pi-phone"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="hasError">
+  <div *ngIf="hasError" class="alert alert-danger d-inline-block" role="alert">
+    Falha ao carregar! <strong (click)="tryAgain.next(undefined)" class="cursor-pointer">Clique aqui</strong> para tentar novamente
+  </div>
+</div>

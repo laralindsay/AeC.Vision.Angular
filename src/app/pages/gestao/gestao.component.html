@@ -1,0 +1,53 @@
+<app-page [hasFilters]="true" [hasDateFilter]="false" [hasSegmentoFilter]="true" [hasOperacaoFilter]="true" [hasMatriculaFilter]="false">
+  <ng-template appPageTemplate="content">
+    <div class="pb-3">
+      <div class="mb-4">
+        <app-breadcrumb [byRoute]="true">
+          <div class="d-flex gap-2">
+            <div class="d-flex gap-1">
+              <p-calendar
+                class="calendar"
+                [showIcon]="false"
+                [formControl]="filterForm.controls.data"
+                placeholder="Data início"
+                [maxDate]="maxDataInicio()"
+                [inputStyle]="{ width: '8em' }"
+              ></p-calendar>
+              <p-calendar
+                class="calendar"
+                [showIcon]="false"
+                [formControl]="filterForm.controls.dataFim"
+                placeholder="Data fim"
+                [minDate]="minDataFim()"
+                [maxDate]="maxDataFim()"
+                [inputStyle]="{ width: '8em' }"
+              ></p-calendar>
+            </div>
+            <div>
+              <app-gestao-analitico-select-buttons></app-gestao-analitico-select-buttons>
+            </div>
+          </div>
+        </app-breadcrumb>
+      </div>
+
+      <div class="px-3">
+        <app-gestao-resumo *ngIf="info()?.perfil !== ProfileEnum.Operador"></app-gestao-resumo>
+        <app-gestao-resumo-operador *ngIf="info()?.perfil === ProfileEnum.Operador"></app-gestao-resumo-operador>
+      </div>
+
+      <div class="px-3 py-2">
+        <div class="row row-cols-1 row-cols-xl-2 row-cols-xxxl-3 g-2 align-content-stretch">
+          <div class="col">
+            <app-gestao-top10></app-gestao-top10>
+          </div>
+          <div class="col">
+            <app-gestao-top-ofensores></app-gestao-top-ofensores>
+          </div>
+          <div class="col">
+            <app-gestao-produtividade></app-gestao-produtividade>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-page>

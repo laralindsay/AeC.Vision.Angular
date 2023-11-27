@@ -1,0 +1,34 @@
+<div class="app-indicador bg-light rounded p-2 d-flex flex-column justify-content-center h-100 w-100">
+  <ng-container *ngIf="!hasError">
+    <div class="app-indicador-header fw-bold fs-6">
+      <span *ngIf="!loading">{{ header }}</span>
+      <p-skeleton *ngIf="loading" height="1em"></p-skeleton>
+    </div>
+
+    <div class="app-indicador-value fw-bold fs-4" *ngIf="!resumido">
+      <span *ngIf="!loading">{{ value }}</span>
+      <p-skeleton *ngIf="loading" height="2em" styleClass="my-1"></p-skeleton>
+    </div>
+
+    <div *ngIf="loading">
+      <p-skeleton height="3em"></p-skeleton>
+    </div>
+
+    <div class="app-indicador-subvalue d-flex justify-content-between align-items-center rounded fs-5 fw-bold px-3"
+         [class.py-1]="resumido"
+         [class.py-2]="!resumido"
+         [class]="subValueClass"
+         *ngIf="!loading"
+    >
+      <div>
+        {{ subValue }}
+      </div>
+
+      <i [class]="icon" *ngIf="icon?.length"></i>
+    </div>
+  </ng-container>
+
+  <div *ngIf="hasError" class="alert alert-danger d-inline-block" role="alert">
+    Falha ao carregar! <strong (click)="emitTryAgain()" class="cursor-pointer">Clique aqui</strong> para tentar novamente
+  </div>
+</div>

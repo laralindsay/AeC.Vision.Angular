@@ -1,0 +1,28 @@
+@import "src/assets/styles/theme/variables";
+
+:host {
+  .auth-container {
+    transition: background 0.5s;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-color: $color-secondary;
+
+
+  }
+
+  .auth-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 1em;
+    min-width: 228px;
+    height: 351px;
+    box-shadow: 8px 8px 16px rgb(0 0 0 / 25%);
+    z-index: 10;
+
+
+    app-vision-logo {
+      color: $color-secondary;
+      display: none;
+    }
+  }
+}

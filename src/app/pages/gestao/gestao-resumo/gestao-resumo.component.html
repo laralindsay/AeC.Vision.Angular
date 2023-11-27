@@ -1,0 +1,56 @@
+<div class="row align-items-stretch g-2">
+  <div class="col-10">
+    <div class="d-flex flex-column gap-2 h-100">
+      <div class="bg-light rounded p-2 d-flex align-items-center gap-2">
+        <i class="pi pi-info-circle text-primary"></i>
+        Visão gestão: Retorna dados das últimas 24hrs
+      </div>
+
+      <div class="flex-grow-1">
+        <app-indicadores></app-indicadores>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-2">
+    <div class="bg-light rounded p-2">
+      <div class="d-flex flex-column gap-2">
+
+        <div *ngIf="!hasError">
+          <div class="fw-bold fs-6">
+            CHAMADAS TOTAIS
+          </div>
+          <p-skeleton height="2em" *ngIf="loading"></p-skeleton>
+          <div *ngIf="!loading" class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center">
+            <div class="fw-bold fs-6">{{ chamada()?.total }}</div>
+            <i class="pi pi-phone"></i>
+          </div>
+        </div>
+
+        <div *ngIf="!hasError">
+          <div class="fw-bold fs-6">
+            TMO DIA
+          </div>
+          <p-skeleton height="2em" *ngIf="loading"></p-skeleton>
+          <div *ngIf="!loading" class="bg-dark bg-opacity-25 px-3 py-1 rounded d-flex justify-content-between align-items-center">
+            <div class="fw-bold fs-6">{{ chamada()?.media }}</div>
+            <i class="pi pi-clock"></i>
+          </div>
+        </div>
+
+        <div *ngIf="hasError">
+          <div *ngIf="hasError" class="alert alert-danger d-inline-block" role="alert">
+            Falha ao carregar! <strong (click)="tryAgain.next(undefined)" class="cursor-pointer">Clique aqui</strong> para tentar novamente
+          </div>
+        </div>
+
+        <div>
+          <a pButton pRipple class="w-100 justify-content-center gap-2" [routerLink]="visaoGeralRouterLink()">
+            <i class="pi pi-file"></i>
+            Visão Geral
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="bg-light rounded p-2 d-flex flex-column gap-2 h-100">
+  <div class="d-flex justify-content-between gap-2 py-2 border-bottom">
+    <div class="fw-bold fs-5">
+      TOP 10
+    </div>
+    <div>
+      <p-selectButton
+        [options]="filtroTipoOptions"
+        [formControl]="filtroTipo"
+      ></p-selectButton>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column gap-1 flex-grow-1">
+    <div class="d-flex justify-content-between">
+      <div>
+        <p-selectButton
+          [options]="filtroTempoOptions"
+          [formControl]="filtroTempo"
+        ></p-selectButton>
+      </div>
+
+      <div>
+        <p-selectButton
+          [options]="filtroAderenteOptions"
+          [formControl]="filtroAderente"
+        ></p-selectButton>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+      <ng-container *ngIf="canShow()">
+        <p-chart
+          *ngIf="hasData()"
+          type="bar"
+          [data]="data()"
+          [options]="options"
+          class="w-100"
+        ></p-chart>
+
+        <div *ngIf="!hasData()" class="alert alert-info d-inline-block my-5" role="alert">
+          Não existe informações!
+        </div>
+      </ng-container>
+
+      <div *ngIf="loading()" class="py-3">
+        <app-loading size="150"></app-loading>
+      </div>
+
+      <div *ngIf="hasError()" class="alert alert-danger d-inline-block my-5" role="alert">
+        Falha ao carregar! <strong (click)="tryAgain()" class="cursor-pointer">Clique aqui</strong> para tentar novamente
+      </div>
+    </div>
+  </div>
+</div>

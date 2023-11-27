@@ -1,0 +1,108 @@
+<app-breadcrumb [items]="breadcrumbs()">
+  <div class="d-flex gap-2">
+    <button
+      pButton
+      pRipple
+      icon="pi pi-sync"
+      class="p-button-success p-2"
+      pTooltip="Atualizar"
+      tooltipPosition="right"
+      (click)="tryAgain()"
+    ></button>
+  </div>
+</app-breadcrumb>
+
+<div class="mb-4"></div>
+
+<p-table
+  [value]="loading || hasError ? [] : data()?.hierarquiaViewModel ?? []"
+  styleClass="p-datatable-striped px-3"
+  [paginator]="true"
+  [rows]="10"
+  [loading]="loading"
+  [showLoader]="false"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando de {first} até {last} de {totalRecords} registros"
+  [showFirstLastIcon]="false"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 1em"></th>
+      <th style="width: 6em">Matrícula</th>
+      <th>Nome</th>
+      <th>Operação</th>
+      <th style="width: 9em">Improdutividade</th>
+      <th style="width: 7em">Inatividade</th>
+      <th style="width: 6em">Silêncio</th>
+      <th style="width: 6em">Ausência</th>
+      <th style="width: 4em" class="text-center">Ações</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData>
+    <tr *ngIf="getRowData(rowData) as row">
+      <td class="text-center">
+        <span
+          class="online-marker"
+          [class.online]="row.conectado"
+          [pTooltip]="row.conectado ? 'Online' : 'Offline'"
+        ></span>
+      </td>
+      <td>{{ row.id ?? "-" }}</td>
+      <td>
+        <a [routerLink]="getGestaoRouterLink(row.id)" *ngIf="row.id">{{ row.nome }}</a>
+        <div *ngIf="!row.id">{{ row.nome }}</div>
+      </td>
+      <td>{{ row.operacao }}</td>
+      <td>{{ row.improdutividade | secondsToTime }}</td>
+      <td>{{ row.inatividade | secondsToTime }}</td>
+      <td>{{ row.silencio | secondsToTime }}</td>
+      <td>{{ row.ausencia | secondsToTime }}</td>
+      <td>
+        <div class="text-center">
+          <a
+            *ngIf="data()?.idPerfil != ProfileEnum.Operador"
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            class="p-button-primary p-button-sm"
+            [routerLink]="getNextRouterLink(row.id)"
+            [queryParams]="nextQueryParams()"
+            queryParamsHandling="merge"
+          ></a>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="loadingbody">
+    <tr>
+      <td colspan="300">
+        <div class="text-center py-4">
+          <app-loading size="110"></app-loading>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="300">
+        <div class="text-center">
+          <div *ngIf="!hasError" class="my-5">Nenhuma pessoa encontrada!</div>
+          <div
+            *ngIf="hasError"
+            class="alert alert-danger d-inline-block my-5"
+            role="alert"
+          >
+            Falha ao carregar!
+            <strong (click)="tryAgain()" class="cursor-pointer"
+              >Clique aqui</strong
+            >
+            para tentar novamente
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

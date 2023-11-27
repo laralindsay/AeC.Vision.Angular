@@ -1,0 +1,91 @@
+<div class="d-flex flex-column px-4">
+  <div class="d-flex flex-row gap-2 align-items-end pb-2">
+    <div class="d-flex flex-column p-1">
+      <label for="tipo">TIPO</label>
+      <p-dropdown
+        placeholder="Filtrar Tipo..."
+        [formControl]="form.controls.tipoAlerta"
+        [appDatasource]="tipo$"
+        optionValue="id"
+        optionLabel="nome"
+        inputId="tipo"
+      ></p-dropdown>
+    </div>
+
+    <div class="d-flex flex-column p-1">
+      <label for="status">STATUS</label>
+      <p-dropdown
+        placeholder="Filtrar Status..."
+        [formControl]="form.controls.statusAlerta"
+        [appDatasource]="status$"
+        optionValue="id"
+        optionLabel="nome"
+        inputId="status"
+      ></p-dropdown>
+    </div>
+
+    <div class="d-flex flex-column p-1" *ngIf="showFiltroSupervisor()">
+      <label for="supervisor">SUPERVISOR</label>
+      <input
+        pInputText
+        placeholder="Filtrar Supervisor..."
+        inputId="supervisor"
+        [formControl]="form.controls.idSupervisor"
+      />
+    </div>
+
+    <div class="d-flex flex-column p-1">
+      <label for="operador">OPERADOR</label>
+      <input
+        pInputText
+        inputId="operador"
+        placeholder="Filtrar Operador..."
+        [formControl]="form.controls.idOperador"
+      />
+    </div>
+
+    <div class="d-flex flex-column p-1">
+      <label for="tempo">Tempo</label>
+      <p-dropdown
+        placeholder="Filtrar Tempo..."
+        [formControl]="form.controls.duracaoAlerta"
+        [appDatasource]="tempo$"
+        optionValue="id"
+        inputId="tempo"
+        optionLabel="nome"
+      ></p-dropdown>
+    </div>
+
+    <div class="gap-2 pb-1">
+      <p-button icon="pi pi-search"></p-button>
+    </div>
+  </div>
+
+  <div class="d-flex export-items justify-content-end align-items-center">
+    <button
+      pButton
+      pRipple
+      icon="bi bi-filetype-csv"
+      class="p-button-primary p-button-sm me-1"
+      (click)="downloadCsv()"
+      [loading]="loading.csv"
+    >
+    </button>
+<!--    <a-->
+<!--      pButton-->
+<!--      pRipple-->
+<!--      icon="bi bi-file-earmark-plus"-->
+<!--      class="p-button-success p-button-sm me-1"-->
+<!--    >-->
+<!--    </a>-->
+    <button
+      pButton
+      pRipple
+      icon="bi bi-filetype-pdf"
+      class="p-button-danger p-button-sm me-1"
+      (click)="downloadPdf()"
+      [loading]="loading.pdf"
+    >
+    </button>
+  </div>
+</div>

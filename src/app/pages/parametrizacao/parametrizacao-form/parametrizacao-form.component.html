@@ -1,0 +1,416 @@
+<app-page>
+  <ng-template appPageTemplate="subheader">
+    <app-breadcrumb [items]="breadcrumbs()"></app-breadcrumb>
+  </ng-template>
+
+  <ng-template appPageTemplate="content">
+    <form class="p-3 d-flex flex-column gap-3" (ngSubmit)="submit()">
+
+      <div class="d-flex gap-3">
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <div>
+            <label class="fw-bold">Parâmetro:</label>
+          </div>
+          <p-dropdown
+            [formControl]="form.controls.idTipoParametrizacao"
+            [appDatasource]="tiposParametrizacao$"            
+            optionValue="id"
+            optionLabel="nome"
+            styleClass="w-100"
+          />
+        </div>
+
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <ng-container *ngIf="form.controls.idTipoParametrizacao.value == 1">
+            <div>
+              <label class="fw-bold">Matrícula:</label>
+            </div>
+            <input pInputText [formControl]="form.controls.valor" placeholder="6 Dígitos"/>
+          </ng-container>
+
+          <ng-container *ngIf="form.controls.idTipoParametrizacao.value == 2">
+            <div>
+              <label class="fw-bold">Selecione:</label>
+            </div>
+            <p-dropdown
+              [formControl]="form.controls.valor"
+              [appDatasource]="segmentos$"
+              [filter]="true"            
+              optionValue="nome"
+              optionLabel="nome"
+              styleClass="w-100"
+            />
+          </ng-container>
+
+          <ng-container *ngIf="form.controls.idTipoParametrizacao.value == 3">
+            <div>
+              <label class="fw-bold">Selecione:</label>
+            </div>
+            <p-dropdown
+              [formControl]="form.controls.valor"
+              [appDatasource]="operacoes$"
+              [filter]="true"            
+              optionValue="nome"
+              optionLabel="nome"
+              styleClass="w-100"
+            />
+          </ng-container>
+
+          <ng-container *ngIf="form.controls.idTipoParametrizacao.value == 4">
+            <div>
+              <label class="fw-bold">Selecione:</label>
+            </div>
+            <p-dropdown
+              [formControl]="form.controls.valor"
+              [appDatasource]="sites$"
+              [filter]="true"            
+              optionValue="nome"
+              optionLabel="nome"
+              styleClass="w-100"
+            />
+          </ng-container>
+        </div>
+        
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <div>
+            <label class="fw-bold">Versão:</label>
+          </div>
+          <p-dropdown
+            [formControl]="form.controls.idVersao"
+            [appDatasource]="versoes$"            
+            optionValue="id"
+            optionLabel="numero"
+            styleClass="w-100"
+            placeholder="Versão"
+          />
+        </div>
+
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <div>
+            <label class="fw-bold">Ambiente:</label>
+          </div>
+          <p-dropdown
+            [formControl]="form.controls.idAmbiente"
+            [appDatasource]="ambientes$"            
+            optionValue="id"
+            optionLabel="nome"
+            styleClass="w-100"
+          />
+        </div>
+
+        <div class="d-flex flex-column" style="min-width: 200px">
+          <div>
+            <label class="fw-bold">Nível mínimo de Log gerado:</label>
+          </div>
+          <p-dropdown
+            [formControl]="form.controls.idNivelLog"
+            [appDatasource]="niveisLog$"            
+            optionValue="id"
+            optionLabel="nome"
+            styleClass="w-100"
+          />
+        </div>
+      </div>
+      
+      <div class="d-flex gap-3 flex-column" style="min-width: 200px">
+        <p-checkbox 
+          [formControl]="form.controls.monitoramentoAtivado"
+          [binary]="true"
+          label="Monitoramento Ativado (Se desativado, o Vision é encerrado)"
+        ></p-checkbox>
+        <p-checkbox 
+          [formControl]="form.controls.monitoramentoHabilitado"
+          [binary]="true"
+          label="Monitoramento Habilitado (Se desativado, o Vision continua executando mas todos os monitores entram em stand-by)">
+        </p-checkbox>
+      </div>
+
+      <div>
+        <p-accordion [activeIndex]="[0, 1, 2]" [multiple]="true">
+          <p-accordionTab>
+            <ng-template pTemplate="header">
+              <div class="d-flex align-items-center gap-1">
+                <i class="fi-rr-computer"></i>
+                <div>Monitores</div>
+              </div>
+            </ng-template>            
+            <p-skeleton *ngIf="loading.parametrizacao" height="2em"></p-skeleton>
+            <div class="d-flex flex-column gap-3" *ngIf="!loading.parametrizacao">
+              <div class="d-flex flex-wrap gap-3">
+                <div class="d-flex flex-column" style="min-width: 250px">
+                  <div>
+                    <label class="fw-bold">INATIVIDADE SEM CHAMADA:</label>
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-mouse"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoInatividadeMouse" placeholder="Inatividade Mouse"/>
+                    </div>
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-keyboard"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoInatividadeTeclado" placeholder="Inatividade Teclado"/>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="d-flex flex-column" style="min-width: 250px">
+                  <div>
+                    <label class="fw-bold">INATIVIDADE COM CHAMADA:</label>
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-mouse"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoInatividadeMouseChamada" placeholder="Inatividade Mouse"/>
+                    </div>
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-keyboard"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoInatividadeTecladoChamada" placeholder="Inatividade Teclado"/>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="d-flex flex-column" style="min-width: 250px">
+                  <div>
+                    <label class="fw-bold">AUSÊNCIA E SILÊNCIO:</label>
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-user-time"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoAusencia" placeholder="Ausência"/>
+                    </div>
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-phone-slash"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoSilencio" placeholder="Silêncio"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="d-flex flex-column" style="min-width: 250px">
+                  <div>
+                    <label class="fw-bold">SILÊNCIO FULLTIME E POOLING SISTEMA:</label>
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-phone-slash"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoSilencioFullTime" placeholder="Silêncio FullTime"/>
+                    </div>
+        
+                    <div class="p-inputgroup w-full md:w-30rem">
+                      <div class="p-inputgroup-addon">
+                        <i class="fi-rr-phone-slash"></i>
+                      </div>
+                      <input pInputText [formControl]="form.controls.tempoPollingSistema" placeholder="Pooling Sistema"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-column gap-3">
+                <div class="d-flex flex-column gap-3" style="min-width: 250px">
+                  <p-checkbox 
+                    [formControl]="form.controls.capturaTela"
+                    [binary]="true"
+                    label="Print da tela quando um alerta é gerado">
+                  </p-checkbox>
+                  <p-checkbox 
+                    [formControl]="form.controls.ausencia"
+                    [binary]="true"
+                    label="Ausência (Alerta eventos de sessão onde o operador não está presente)">
+                  </p-checkbox>
+                  <p-checkbox 
+                    [formControl]="form.controls.improdutividade"
+                    [binary]="true"
+                    label="Improdutividade (Alerta para improdutividade)">
+                  </p-checkbox>
+                </div>
+
+                <div class="d-flex flex-column gap-2" style="min-width: 250px">
+                  <p-checkbox 
+                    [formControl]="form.controls.pausa"
+                    [binary]="true"
+                    label="Pausa (Identificação de Pausas)">
+                  </p-checkbox>
+                  <div class="d-flex flex-column gap-1 ps-3">
+                    <p-checkbox 
+                      [formControl]="form.controls.pausaLocker"
+                      [binary]="true"
+                      label="Pausa Locker (Identifica pausa pelo Locker)">
+                    </p-checkbox>
+                    <p-checkbox 
+                      [formControl]="form.controls.pausaWDE"
+                      [binary]="true"
+                      label="Pausa WDE (Identifica pausa pelo SoftPhone WDE)">
+                    </p-checkbox>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-column gap-2" style="min-width: 250px">
+                  <p-checkbox 
+                    [formControl]="form.controls.ligacao"
+                    [binary]="true"
+                    label="Ligação (Identificação de Chamadas)">
+                  </p-checkbox>
+                  <div class="d-flex flex-column gap-1 ps-3">
+                    <p-checkbox 
+                      [formControl]="form.controls.ligacaoLocker"
+                      [binary]="true"
+                      label="Ligação Locker (Identifica ligação pelo Locker)">
+                    </p-checkbox>
+                    <p-checkbox 
+                      [formControl]="form.controls.ligacaoWDE"
+                      [binary]="true"
+                      label="Ligação WDE (Identifica ligação pelo SoftPhone WDE)">
+                    </p-checkbox>
+                  </div>
+                </div>
+                
+                <div class="d-flex flex-column gap-2" style="min-width: 250px">
+                  <p-checkbox 
+                    [formControl]="form.controls.silencio"
+                    [binary]="true"
+                    label="Silêncio (Alerta para silêncio durante chamada)">
+                  </p-checkbox>
+                  <p-checkbox 
+                    [formControl]="form.controls.silencioFullTime"
+                    [binary]="true"
+                    label="Silêncio FullTime (Alerta para silêncio sem chamada)">
+                  </p-checkbox>
+                </div>
+                
+                <div class="d-flex flex-column gap-2" style="min-width: 250px">                
+                  <p-checkbox 
+                    [formControl]="form.controls.inatividade"
+                    [binary]="true"
+                    label="Inatividade (Alerta para inatividade de mouse e teclado)">
+                  </p-checkbox>
+                  <div class="d-flex flex-column gap-1 ps-3">
+                    <p-checkbox 
+                      [formControl]="form.controls.inatividadeMouseTeclado"
+                      [binary]="true"
+                      label="Inatividade - Sem ligação em curso">
+                    </p-checkbox>
+                    <p-checkbox 
+                      [formControl]="form.controls.inatividadeMouseTecladoChamada"
+                      [binary]="true"
+                      label="Inatividade - Durante ligação em curso">
+                    </p-checkbox>
+                  </div>
+                </div>
+                
+                <div class="d-flex flex-column gap-2" style="min-width: 250px">
+                  <p-checkbox 
+                    [formControl]="form.controls.sistema"
+                    [binary]="true"
+                    label="Sistema (Sistemas aderentes/Inaderentes)">
+                  </p-checkbox>
+                  <div class="d-flex flex-column gap-1 ps-3">
+                    <p-checkbox 
+                      [formControl]="form.controls.sistemaWebTitulo"
+                      [binary]="true"
+                      label="Sistema Web - Identifica o site pelo Título do Navegador">
+                    </p-checkbox>
+                    <p-checkbox 
+                      [formControl]="form.controls.sistemaWebUrl"
+                      [binary]="true"
+                      label="Sistema Web - Identifica o site pelo Endereço do Navegador">
+                    </p-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+          <p-accordionTab>
+            <ng-template pTemplate="header">
+              <div class="d-flex align-items-center gap-1">
+                <i class="fi-rr-browser"></i>
+                <div>Sistemas</div>
+              </div>
+            </ng-template>
+            <p-skeleton *ngIf="loading.sistemas" height="2em"></p-skeleton>
+            <div class="d-flex flex-column gap-4" *ngIf="!loading.sistemas">   
+              <div *ngFor="let tipo of sistemas()">
+                <ng-container *ngIf="!tipo.padrao">
+                  <div *ngFor="let tipos of tipo.tipos">
+                    <div class="d-flex gap-2 fw-bold ps-2 py-2 fs-5">
+                      <i [class]="tipos.tipoSistema.icone"></i>
+                      <div>{{ tipos.tipoSistema.nome }}</div>
+                    </div>
+                    <div style="column-count: 3">
+                      <div *ngFor="let sistema of tipos.sistemas">
+                        <p-checkbox
+                          [id]="sistema.id"
+                          [name]="'checkbox_' + sistema.id"
+                          [label]="sistema.descricao!"
+                          [binary]="true"
+                          (onChange)="addOrRemoveSistema(sistema.id!, $event.checked)"
+                          [(ngModel)]="sistema.checked"
+                        ></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </p-accordionTab>
+
+
+          <p-accordionTab>
+            <ng-template pTemplate="header">
+              <div class="d-flex align-items-center gap-1">
+                <i class="fi-rr-checkbox"></i>
+                <div>Sistemas Padrão</div>
+              </div>
+            </ng-template>
+            <p-skeleton *ngIf="loading.sistemas" height="2em"></p-skeleton>
+            <div class="d-flex flex-column gap-4" *ngIf="!loading.sistemas">              
+              <div *ngFor="let tipo of sistemas()">
+                <ng-container *ngIf="tipo.padrao">
+                  <div *ngFor="let tipos of tipo.tipos">
+                    <div class="d-flex gap-2 fw-bold ps-2 py-2 fs-5">
+                      <i [class]="tipos.tipoSistema.icone"></i>
+                      <div>{{ tipos.tipoSistema.nome }}</div>
+                    </div>
+                    <div style="column-count: 3">
+                      <div *ngFor="let sistema of tipos.sistemas">
+                        <p-checkbox
+                          [formControl]="form.controls.sistemasPadrao"
+                          [binary]="true" 
+                          [label]="sistema.descricao!"
+                        ></p-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <div>
+        <button pButton pRipple type="submit" label="Salvar" icon="pi pi-save"></button>
+      </div>
+    </form>
+  </ng-template>
+</app-page>

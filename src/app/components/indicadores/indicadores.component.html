@@ -1,0 +1,36 @@
+<div class="row g-2 h-100">
+  <div class="col h-100">
+    <app-indicador
+      [header]="logadosHeader ?? 'LOGADOS'"
+      [value]="(logado()?.totalVision ?? 0) + '/' + (logado()?.totalHominum ?? 0)"
+      [subValue]="logado()?.tempoTotalVision ? (logado()?.tempoTotalVision | secondsToTime) : '00:00:00'"
+      subValueClass="bg-success bg-opacity-25 text-success"
+      icon="pi pi-map-marker"
+      [loading]="loading.logado"
+      [hasError]="hasError.logado"
+      [resumido]="resumido"
+      (tryAgain)="tryAgain.logado.next(undefined)"
+    ></app-indicador>
+  </div>
+
+
+  <ng-container *ngIf="loading.indicadores || hasError.indicadores">
+    <div class="col h-100" *ngFor="let _ of [1, 2, 3, 4]">
+      <app-indicador [loading]="loading.indicadores" [hasError]="hasError.indicadores" [resumido]="resumido" (tryAgain)="tryAgain.indicadores.next(undefined)"></app-indicador>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!loading.indicadores && !hasError.indicadores">
+    <div class="col h-100" *ngFor="let indicador of indicadores()">
+      <app-indicador
+        [header]="indicador.header"
+        [value]="indicador.soma | secondsToTime"
+        [subValue]="indicador.media | secondsToTime"
+        subValueClass="bg-warning bg-opacity-25 text-warning"
+        [icon]="indicador.icon"
+        [loading]="loading.indicadores"
+        [hasError]="hasError.indicadores"
+        [resumido]="resumido"
+      ></app-indicador>
+    </div>
+  </ng-container>
+</div>

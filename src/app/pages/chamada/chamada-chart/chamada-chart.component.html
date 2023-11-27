@@ -1,0 +1,29 @@
+<div class="bg-light rounded p-2 d-flex flex-column gap-2 h-100">
+  <div class="d-flex flex-column gap-1 flex-grow-1">
+    <div class="d-flex justify-content-center align-items-center flex-grow-1" style="height: 350px">
+      <ng-container *ngIf="canShow()">
+        <p-chart
+          *ngIf="hasData()"
+          type="bar"
+          [data]="chartData()"
+          [options]="options()"
+          class="w-100 h-100"
+          height="100%"
+          width="100%"
+        ></p-chart>
+
+        <div *ngIf="!hasData()" class="alert alert-info d-inline-block my-5" role="alert">
+          Não existe informações!
+        </div>
+      </ng-container>
+
+      <div *ngIf="loading()" class="py-3">
+        <app-loading size="150"></app-loading>
+      </div>
+
+      <div *ngIf="hasError()" class="alert alert-danger d-inline-block my-5" role="alert">
+        Falha ao carregar! <strong (click)="tryAgain()" class="cursor-pointer">Clique aqui</strong> para tentar novamente
+      </div>
+    </div>
+  </div>
+</div>
